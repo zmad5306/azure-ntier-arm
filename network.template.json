@@ -96,22 +96,27 @@
                         "name": "web-subnet",
                         "properties": {
                             "addressPrefix": "10.0.0.0/24",
-                            "networkSecurityGroup": "[resourceId('Microsoft.Network/networkSecurityGroups', 'web-nsg')]"
-                            
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'web-nsg')]"
+                            }
                         }
                     },
                     {
                         "name": "service-subnet",
                         "properties": {
                             "addressPrefix": "10.0.1.0/24",
-                            "networkSecurityGroup": "[resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg')]"
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg')]"
+                            }
                         }
                     },
                     {
                         "name": "mgmt-subnet",
                         "properties": {
                             "addressPrefix": "10.0.2.0/24",
-                            "networkSecurityGroups": "[resourceId('Microsoft.Network/networkSecurityGroups', 'mgmt-nsg')]"
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'mgmt-nsg')]"
+                            }
                         }
                     }
                 ]
