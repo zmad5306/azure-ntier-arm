@@ -4,6 +4,12 @@
     "parameters": {
         "vmName": {
             "value": "web-vm1"
+        },
+        "vNetName": {
+            "value": "ntier-vnet"
+        },
+        "webSubnetName": {
+            "value": "web-subnet"
         }
     }
 }
