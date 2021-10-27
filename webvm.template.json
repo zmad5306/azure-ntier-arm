@@ -67,7 +67,7 @@
                         "version": "latest"
                     },
                     "osDisk": {
-                        "name": "web-vm1-OSDisk",
+                        "name": "[concat(parameters('vmName'), '-OSDisk')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
                     }
