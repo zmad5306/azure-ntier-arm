@@ -33,7 +33,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ntier-app-rg
           template: webvms.template.json
-          parameters: common.parameters.json, web-vm1.parameters.json
+          parameters: common.parameters.json web-vm1.parameters.json
 
       - uses: azure/arm-deploy@v1
         name: Deploy Web VM 2
@@ -41,4 +41,4 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ntier-app-rg
           template: webvms.template.json
-          parameters: common.parameters.json, web-vm2.parameters.json
+          parameters: common.parameters.json web-vm2.parameters.json
