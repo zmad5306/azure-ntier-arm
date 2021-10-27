@@ -6,78 +6,6 @@
     "variables": {},
     "resources": [
         {
-            "name": "web-nsg",
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2020-11-01",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "securityRules": [
-                    {
-                        "name": "Tcp_8081_Allow",
-                        "properties": {
-                            "description": "Allow inbound 8081 for web app",
-                            "protocol": "Tcp",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "8081",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "10.0.0.0/24",
-                            "access": "Allow",
-                            "priority": 100,
-                            "direction": "Inbound"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "name": "service-nsg",
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2020-11-01",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "securityRules": [
-                    {
-                        "name": "Tcp_8080_Allow",
-                        "properties": {
-                            "description": "Allow inbound 8080 for web app",
-                            "protocol": "Tcp",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "8080",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "10.0.1.0/24",
-                            "access": "Allow",
-                            "priority": 100,
-                            "direction": "Inbound"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "name": "mgmt-nsg",
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2020-11-01",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "securityRules": [
-                    {
-                        "name": "Tcp_Allow_443",
-                        "properties": {
-                            "description": "Allow inbound 443 for bastion",
-                            "protocol": "Tcp",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "433",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "10.0.2.0/24",
-                            "access": "Allow",
-                            "priority": 100,
-                            "direction": "Inbound"
-                        }
-                    }
-                ]
-            }
-        },
-        {
             "name": "ntier-vnet",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2020-11-01",
@@ -97,35 +25,93 @@
                         "properties": {
                             "addressPrefix": "10.0.0.0/24"
                         },
-                        "networkSecurityGroups": [
-                            "[reference(resourceId('Microsoft.Network/networkSecurityGroups', 'web-nsg'))]"
-                        ]
+                        "networkSecurityGroup": {
+                            "name": "web-nsg",
+                            "type": "Microsoft.Network/networkSecurityGroups",
+                            "apiVersion": "2020-11-01",
+                            "location": "[resourceGroup().location]",
+                            "properties": {
+                                "securityRules": [
+                                    {
+                                        "name": "Tcp_8081_Allow",
+                                        "properties": {
+                                            "description": "Allow inbound 8081 for web app",
+                                            "protocol": "Tcp",
+                                            "sourcePortRange": "*",
+                                            "destinationPortRange": "8081",
+                                            "sourceAddressPrefix": "*",
+                                            "destinationAddressPrefix": "10.0.0.0/24",
+                                            "access": "Allow",
+                                            "priority": 100,
+                                            "direction": "Inbound"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
                     },
                     {
                         "name": "service-subnet",
                         "properties": {
                             "addressPrefix": "10.0.1.0/24"
                         },
-                        "networkSecurityGroups": [
-                            "[reference(resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg'))]"
-                        ]
+                        "networkSecurityGroup": {
+                            "name": "service-nsg",
+                            "type": "Microsoft.Network/networkSecurityGroups",
+                            "apiVersion": "2020-11-01",
+                            "location": "[resourceGroup().location]",
+                            "properties": {
+                                "securityRules": [
+                                    {
+                                        "name": "Tcp_8080_Allow",
+                                        "properties": {
+                                            "description": "Allow inbound 8080 for web app",
+                                            "protocol": "Tcp",
+                                            "sourcePortRange": "*",
+                                            "destinationPortRange": "8080",
+                                            "sourceAddressPrefix": "*",
+                                            "destinationAddressPrefix": "10.0.1.0/24",
+                                            "access": "Allow",
+                                            "priority": 100,
+                                            "direction": "Inbound"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
                     },
                     {
                         "name": "mgmt-subnet",
                         "properties": {
                             "addressPrefix": "10.0.2.0/24"
                         },
-                        "networkSecurityGroups": [
-                            "[reference(resourceId('Microsoft.Network/networkSecurityGroups', 'mgmt-nsg'))]"
-                        ]
+                        "networkSecurityGroup": {
+                            "name": "mgmt-nsg",
+                            "type": "Microsoft.Network/networkSecurityGroups",
+                            "apiVersion": "2020-11-01",
+                            "location": "[resourceGroup().location]",
+                            "properties": {
+                                "securityRules": [
+                                    {
+                                        "name": "Tcp_Allow_443",
+                                        "properties": {
+                                            "description": "Allow inbound 443 for bastion",
+                                            "protocol": "Tcp",
+                                            "sourcePortRange": "*",
+                                            "destinationPortRange": "433",
+                                            "sourceAddressPrefix": "*",
+                                            "destinationAddressPrefix": "10.0.2.0/24",
+                                            "access": "Allow",
+                                            "priority": 100,
+                                            "direction": "Inbound"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
                     }
                 ]
-            },
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'mgmt-nsg')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'web-nsg')]"
-            ]
+            }
         }
     ],
     "outputs": {}
