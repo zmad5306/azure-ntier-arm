@@ -20,7 +20,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[resourceId(resourceGroup().id, 'Microsoft.Network/virtualNetworks/subnets', 'ntier-vnet', 'web-subnet')]"
+                                "id": "[resourceId(resourceGroup().id, 'Microsoft.Network/virtualNetworks/subnets', 'web-subnet')]"
                             }
                         }
                     }
