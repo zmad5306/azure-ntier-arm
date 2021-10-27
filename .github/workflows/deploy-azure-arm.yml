@@ -9,6 +9,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      RG_NAME: ntier-app-rg
+
     steps:
 
       - uses: actions/checkout@v2
@@ -23,7 +26,7 @@ jobs:
         name: Deploy vNet, Sub Nets and NSGs
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: ntier-app-rg
+          resourceGroupName: ${{ env.RG_NAME }}
           template: network.template.json
           parameters: network.parameters.json
 
@@ -31,7 +34,7 @@ jobs:
         name: Deploy Web VM 1
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: ntier-app-rg
+          resourceGroupName: ${{ env.RG_NAME }}
           template: webvm.template.json
           parameters: web-vm1.parameters.json
 
@@ -39,6 +42,6 @@ jobs:
         name: Deploy Web VM 2
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: ntier-app-rg
+          resourceGroupName: ${{ env.RG_NAME }}
           template: webvm.template.json
           parameters: web-vm2.parameters.json
