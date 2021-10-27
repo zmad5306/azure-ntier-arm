@@ -106,7 +106,7 @@
                         "properties": {
                             "addressPrefix": "10.0.1.0/24"
                         },
-                        "networkSecurityGroups: [
+                        "networkSecurityGroups": [
                             "[reference(resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg'))]"
                         ]
                     },
