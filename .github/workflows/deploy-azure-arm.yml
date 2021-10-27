@@ -18,13 +18,25 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - uses: azure/arm-deploy@v1
+        name: Deploy vNet, Sub Nets and NSGs
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ntier-app-rg
           template: network.template.json
+          parameters: common.parameters.json
 
       - uses: azure/arm-deploy@v1
+        name: Deploy Web VM 1
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ntier-app-rg
           template: webvms.template.json
+          parameters: common.parameters.json, web-vm1.parameters.json
+
+      - uses: azure/arm-deploy@v1
+        name: Deploy Web VM 2
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ntier-app-rg
+          template: webvms.template.json
+          parameters: common.parameters.json, web-vm2.parameters.json

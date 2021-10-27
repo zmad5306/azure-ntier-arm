@@ -1,7 +1,20 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
+    "parameters": {
+        "vNetName": {
+            "type": "string"
+        },
+        "webSubnetName": {
+            "type": "string"
+        },
+        "servcieSubnetName": {
+            "type": "string"
+        },
+        "mgmtSubNetName": {
+            "type": "string"
+        }
+    },
     "functions": [],
     "variables": {},
     "resources": [
@@ -93,7 +106,7 @@
                 },
                 "subnets": [
                     {
-                        "name": "web-subnet",
+                        "name": "[parameters('webSubnetName')]",
                         "properties": {
                             "addressPrefix": "10.0.0.0/24",
                             "networkSecurityGroup": {
@@ -102,7 +115,7 @@
                         }
                     },
                     {
-                        "name": "service-subnet",
+                        "name": "[parameters('servcieSubnetName')]",
                         "properties": {
                             "addressPrefix": "10.0.1.0/24",
                             "networkSecurityGroup": {
@@ -111,7 +124,7 @@
                         }
                     },
                     {
-                        "name": "mgmt-subnet",
+                        "name": "[parameters('mgmtSubNetName')]",
                         "properties": {
                             "addressPrefix": "10.0.2.0/24",
                             "networkSecurityGroup": {
