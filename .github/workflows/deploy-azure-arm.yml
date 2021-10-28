@@ -26,6 +26,7 @@ jobs:
         name: Deploy resource group
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.RG_NAME }}
           template: rg.template.json
           parameters: rgName=${{ env.RG_NAME }}
           deploymentName: resource-group
