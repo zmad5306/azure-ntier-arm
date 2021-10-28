@@ -16,10 +16,13 @@
         }
     },
     "functions": [],
-    "variables": {},
+    "variables": {
+        "webNsgName": "web-nsg",
+        "serviceNsgName": "service-nsg"
+    },
     "resources": [
         {
-            "name": "web-nsg",
+            "name": "[variables('webNsgName')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2020-11-01",
             "location": "[resourceGroup().location]",
@@ -43,7 +46,7 @@
             }
         },
         {
-            "name": "service-nsg",
+            "name": "[variables('serviceNsgName')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2020-11-01",
             "location": "[resourceGroup().location]",
@@ -86,7 +89,7 @@
                         "properties": {
                             "addressPrefix": "10.0.0.0/24",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'web-nsg')]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNsgName'))]"
                             }
                         }
                     },
@@ -95,7 +98,7 @@
                         "properties": {
                             "addressPrefix": "10.0.1.0/24",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg')]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('serviceNsgName'))]"
                             }
                         }
                     },
@@ -108,8 +111,8 @@
                 ]
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'web-nsg')]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('serviceNsgName'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNsgName'))]"
             ]
         }
     ],
