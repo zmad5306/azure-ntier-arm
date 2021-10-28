@@ -415,30 +415,6 @@
             }
         },
         {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2020-11-01",
-            "name": "[concat(variables('bastionNsgName'), '/OutboundTovNet')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('bastionNsgName'))]"
-            ],
-            "properties": {
-                "protocol": "*",
-                "sourcePortRange": "*",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "VirtualNetwork",
-                "access": "Allow",
-                "priority": 110,
-                "direction": "Outbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges": [
-                    "22",
-                    "3389"
-                ],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-        },
-        {
             "name": "[parameters('vNetName')]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2020-11-01",
