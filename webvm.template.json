@@ -42,7 +42,7 @@
                 "dnsSettings": {
                     "dnsServers": []
                 },
-                "enableAcceleratedNetworking": true,
+                "enableAcceleratedNetworking": false,
                 "enableIPForwarding": false
             }
         },
