@@ -49,7 +49,7 @@
                 "dnsName": "[parameters('dnsName')]",
                 "ipConfigurations": [
                     {
-                        "name": "bastionIp",
+                        "name": "bastionIpConf",
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
