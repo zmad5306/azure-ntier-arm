@@ -29,13 +29,13 @@
             "properties": {
                 "securityRules": [
                     {
-                        "name": "Tcp_8081_Allow",
+                        "name": "Tcp_22_Allow",
                         "properties": {
-                            "description": "Allow inbound 8081 for web app",
+                            "description": "Allow inbound 22 for web app",
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
-                            "destinationPortRange": "8081",
-                            "sourceAddressPrefix": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "10.0.2.0/24",
                             "destinationAddressPrefix": "10.0.0.0/24",
                             "access": "Allow",
                             "priority": 100,
@@ -53,13 +53,13 @@
             "properties": {
                 "securityRules": [
                     {
-                        "name": "Tcp_8080_Allow",
+                        "name": "Tcp_22_Allow",
                         "properties": {
-                            "description": "Allow inbound 8080 for web app",
+                            "description": "Allow inbound 22 for web app",
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
-                            "destinationPortRange": "8080",
-                            "sourceAddressPrefix": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "10.0.2.0/24",
                             "destinationAddressPrefix": "10.0.1.0/24",
                             "access": "Allow",
                             "priority": 100,
