@@ -53,7 +53,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.RG_NAME }}
           template: webvm.template.json
-          parameters: web-vm1.parameters.json
+          parameters: web-vm1.parameters.json vmPassword=${{ secrets.AZURE_VM_PASSWORD }}
           deploymentName: web-vm1
 
       # - uses: azure/arm-deploy@v1

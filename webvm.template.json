@@ -13,6 +13,9 @@
         },
         "vmSize": {
             "type": "string"
+        },
+        "vmPassword": {
+            "type": "securestring"
         }
     },
     "functions": [],
@@ -54,7 +57,8 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('vmName')]",
-                    "adminUsername": "adminusername",
+                    "adminUsername": "adminUsername",
+                    "adminPassword": "[parameters('vmPassword')]",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false,
                         "provisionVMAgent": true,
