@@ -57,8 +57,7 @@
                 "scaleUnits": "[parameters('bastionHostScaleUnits')]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', variables('bastionPubIpName'))]",
-                "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('bastionSubnetName'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('bastionPubIpName'))]"
             ]
         }
     ],
