@@ -13,6 +13,9 @@
         },
         "bastionHostScaleUnits": {
             "type": "Int"
+        },
+        "dnsName": {
+            "type": "string"
         }
     },
     "functions": [],
@@ -43,11 +46,12 @@
                 "name": "[parameters('bastionHostSku')]"
             },
             "properties": {
-                // "dnsName": "string",
+                "dnsName": "[parameters('dnsName')]",
                 "ipConfigurations": [
                     {
                         "name": "bastionIp",
                         "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('bastionPubIpName'))]"
                             },

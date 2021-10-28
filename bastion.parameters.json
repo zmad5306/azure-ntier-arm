@@ -13,6 +13,9 @@
         },
         "bastionHostScaleUnits": {
             "value": 2
+        },
+        "dnsName": {
+            "value": "azure-ntier-arm.bastion.azure.com"
         }
     }
 }
