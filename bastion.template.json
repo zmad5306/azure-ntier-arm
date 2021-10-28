@@ -13,9 +13,6 @@
         },
         "bastionHostScaleUnits": {
             "type": "Int"
-        },
-        "dnsName": {
-            "type": "string"
         }
     },
     "functions": [],
@@ -46,7 +43,6 @@
                 "name": "[parameters('bastionHostSku')]"
             },
             "properties": {
-                "dnsName": "[parameters('dnsName')]",
                 "ipConfigurations": [
                     {
                         "name": "bastionIpConf",
