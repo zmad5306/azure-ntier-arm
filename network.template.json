@@ -67,30 +67,6 @@
             }
         },
         {
-            "name": "mgmt-nsg",
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2020-11-01",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "securityRules": [
-                    {
-                        "name": "Tcp_Allow_443",
-                        "properties": {
-                            "description": "Allow inbound 443 for bastion",
-                            "protocol": "Tcp",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "433",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "10.0.2.0/24",
-                            "access": "Allow",
-                            "priority": 100,
-                            "direction": "Inbound"
-                        }
-                    }
-                ]
-            }
-        },
-        {
             "name": "[parameters('vNetName')]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2020-11-01",
@@ -126,16 +102,13 @@
                     {
                         "name": "[parameters('bastionSubnetName')]",
                         "properties": {
-                            "addressPrefix": "10.0.2.0/24",
-                            "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'mgmt-nsg')]"
-                            }
+                            "addressPrefix": "10.0.2.0/24"
                         }
                     }
                 ]
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'mgmt-nsg')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', 'bastion-nsg')]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg')]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', 'web-nsg')]"
             ]

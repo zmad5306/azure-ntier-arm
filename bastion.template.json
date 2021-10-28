@@ -7,6 +7,12 @@
         },
         "bastionSubnetName": {
             "type": "string"
+        },
+        "bastionHostSku": {
+            "type": "String"
+        },
+        "bastionHostScaleUnits": {
+            "type": "Int"
         }
     },
     "functions": [],
@@ -17,14 +23,11 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2020-11-01",
             "location": "[resourceGroup().location]",
-            "tags": {
-                "displayName": "basitionPublicIp"
+            "sku": {
+                "name": "Standard"
             },
-            "properties": {
-                "publicIPAllocationMethod": "Dynamic"
-                // "dnsSettings": {
-                //     "domainNameLabel": "dnsname1"
-                // }
+            "properties": {  
+                "publicIPAllocationMethod": "Static"
             }
         },
         {
@@ -32,6 +35,9 @@
             "apiVersion": "2020-04-01",
             "name": "bastion",
             "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "[parameters('bastionHostSku')]"
+            },
             "properties": {
                 // "dnsName": "string",
                 "ipConfigurations": [
@@ -46,8 +52,12 @@
                             }
                         }
                     }
-                ]
-            }
+                ],
+                "scaleUnits": "[parameters('bastionHostScaleUnits')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', 'basitionPublicIp')]"
+            ]
         }
     ],
     "outputs": {}
