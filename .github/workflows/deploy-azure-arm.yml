@@ -56,14 +56,14 @@ jobs:
           parameters: web-vm1.parameters.json
           deploymentName: web-vm1
 
-      - uses: azure/arm-deploy@v1
-        name: Deploy Web VM 2
-        with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: ${{ env.RG_NAME }}
-          template: webvm.template.json
-          parameters: web-vm2.parameters.json
-          deploymentName: web-vm2
+      # - uses: azure/arm-deploy@v1
+      #   name: Deploy Web VM 2
+      #   with:
+      #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #     resourceGroupName: ${{ env.RG_NAME }}
+      #     template: webvm.template.json
+      #     parameters: web-vm2.parameters.json
+      #     deploymentName: web-vm2
 
       - uses: azure/arm-deploy@v1
         name: Deploy Bastion
