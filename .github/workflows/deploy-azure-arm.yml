@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      RG_NAME: ntier-app-rg
+      RG_NAME: ntier-app-rg-2
       REGION: East US
 
     steps:
