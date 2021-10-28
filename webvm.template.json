@@ -70,8 +70,7 @@
                             "assessmentMode": "ImageDefault"
                         }
                     },
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
+                    "allowExtensionOperations": true
                 },
                 "storageProfile": {
                     "imageReference": {
