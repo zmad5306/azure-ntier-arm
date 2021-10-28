@@ -12,7 +12,7 @@
             "value": "web-subnet"
         },
         "vmSize": {
-            "value": "Standard_A2_v2"
+            "value": "Standard_D2s_v3"
         }
     }
 }
