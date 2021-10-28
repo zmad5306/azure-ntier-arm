@@ -79,7 +79,27 @@
                             "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
                         }
                     ]
-                }
+                },
+                "resources": [
+                    {
+                        "name": "config-app",
+                        "type": "extensions",
+                        "location": "[resourceGroup().location]",
+                        "apiVersion": "2019-03-01",
+                        "dependsOn": [
+                            "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName')),copyindex())]"
+                        ],
+                        "properties": {
+                            "publisher": "Microsoft.Azure.Extensions",
+                            "type": "CustomScript",
+                            "typeHandlerVersion": "2.1",
+                            "autoUpgradeMinorVersion": true,
+                            "protectedSettings": {
+                                "commandToExecute": "IyEvYmluL2Jhc2gKY3VybCAtZnNTTCBodHRwczovL2RlYi5ub2Rlc291cmNlLmNvbS9zZXR1cF8xNy54IHwgc3VkbyAtRSBiYXNoIC0Kc3VkbyBhcHQtZ2V0IGluc3RhbGwgLXkgbm9kZWpzCmdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20vem1hZDUzMDYvbm9kZS1jbGllbnQtMS5naXQKY2Qgbm9kZS1jbGllbnQtMQpucG0gaQpzdWRvIGNwIG5vZGUtY2xpZXQtMS5zZXJ2aWNlIC9ldGMvc3lzdGVtZC9zeXN0ZW0vbm9kZS1jbGllbnQtMS5zZXJ2aWNlCnN1ZG8gc3lzdGVtY3RsIGVuYWJsZSBub2RlLWNsaWVudC0xLnNlcnZpY2UKc3VkbyBzeXN0ZW1jdGwgc3RhcnQgbm9kZS1jbGllbnQtMS5zZXJ2aWNl"
+                            }
+                        }
+                    }
+                ]
             }
         },
         {
@@ -106,27 +126,7 @@
                 },
                 "enableAcceleratedNetworking": true,
                 "enableIPForwarding": false
-            },
-            "resources": [
-                {
-                    "name": "config-app",
-                    "type": "extensions",
-                    "location": "[resourceGroup().location]",
-                    "apiVersion": "2019-03-01",
-                    "dependsOn": [
-                        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName')),copyindex())]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Azure.Extensions",
-                        "type": "CustomScript",
-                        "typeHandlerVersion": "2.1",
-                        "autoUpgradeMinorVersion": true,
-                        "protectedSettings": {
-                            "commandToExecute": "IyEvYmluL2Jhc2gKY3VybCAtZnNTTCBodHRwczovL2RlYi5ub2Rlc291cmNlLmNvbS9zZXR1cF8xNy54IHwgc3VkbyAtRSBiYXNoIC0Kc3VkbyBhcHQtZ2V0IGluc3RhbGwgLXkgbm9kZWpzCmdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20vem1hZDUzMDYvbm9kZS1jbGllbnQtMS5naXQKY2Qgbm9kZS1jbGllbnQtMQpucG0gaQpzdWRvIGNwIG5vZGUtY2xpZXQtMS5zZXJ2aWNlIC9ldGMvc3lzdGVtZC9zeXN0ZW0vbm9kZS1jbGllbnQtMS5zZXJ2aWNlCnN1ZG8gc3lzdGVtY3RsIGVuYWJsZSBub2RlLWNsaWVudC0xLnNlcnZpY2UKc3VkbyBzeXN0ZW1jdGwgc3RhcnQgbm9kZS1jbGllbnQtMS5zZXJ2aWNl"
-                        }
-                    }
-                }
-            ]
+            }
         }
     ],
     "outputs": {}
