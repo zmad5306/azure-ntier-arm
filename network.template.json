@@ -108,7 +108,6 @@
                 ]
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', 'bastion-nsg')]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', 'service-nsg')]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', 'web-nsg')]"
             ]
