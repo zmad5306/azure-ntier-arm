@@ -16,6 +16,9 @@
         },
         "vmPassword": {
             "type": "securestring"
+        },
+        "vmUsername": {
+            "type": "securestring"
         }
     },
     "functions": [],
@@ -57,7 +60,7 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('vmName')]",
-                    "adminUsername": "adminUsername",
+                    "adminUsername": "[parameters('vmUsername')]",
                     "adminPassword": "[parameters('vmPassword')]",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false,
