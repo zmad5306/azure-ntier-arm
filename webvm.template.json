@@ -86,9 +86,6 @@
                         "type": "extensions",
                         "location": "[resourceGroup().location]",
                         "apiVersion": "2019-03-01",
-                        "dependsOn": [
-                            "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName')),copyindex())]"
-                        ],
                         "properties": {
                             "publisher": "Microsoft.Azure.Extensions",
                             "type": "CustomScript",
