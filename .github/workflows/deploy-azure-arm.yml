@@ -1,6 +1,11 @@
 name: Deploy Azure Arm
 
 on:
+
+  push:
+    branches: 
+    - main
+
   workflow_dispatch:
 
 jobs:
