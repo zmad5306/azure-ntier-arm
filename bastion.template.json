@@ -16,7 +16,9 @@
         }
     },
     "functions": [],
-    "variables": {},
+    "variables": {
+        "bastionPubIpName": "basitionPublicIp"
+    },
     "resources": [
         {
             "name": "basitionPublicIp",
@@ -45,7 +47,7 @@
                         "name": "bastionIp",
                         "properties": {
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'basitionPublicIp')]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('bastionPubIpName'))]"
                             },
                             "subnet": {
                                 "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('bastionSubnetName'))]"
@@ -56,7 +58,7 @@
                 "scaleUnits": "[parameters('bastionHostScaleUnits')]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', 'basitionPublicIp')]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('bastionPubIpName'))]"
             ]
         }
     ],
