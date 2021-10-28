@@ -265,7 +265,9 @@
                             "addressPrefix": "10.0.0.0/24",
                             "networkSecurityGroup": {
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNsgName'))]"
-                            }
+                            },
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
                         }
                     },
                     {
@@ -274,7 +276,9 @@
                             "addressPrefix": "10.0.1.0/24",
                             "networkSecurityGroup": {
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('serviceNsgName'))]"
-                            }
+                            },
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
                         }
                     },
                     {
@@ -283,7 +287,9 @@
                             "addressPrefix": "10.0.2.0/24",
                             "networkSecurityGroup": {
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('bastionNsgName'))]"
-                            }
+                            },
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
                         }
                     }
                 ]
