@@ -5,8 +5,8 @@
         "vNetName": {
             "value": "ntier-vnet"
         },
-        "mgmtSubnetName": {
-            "value": "mgmt-subnet"
+        "bastionSubnetName": {
+            "value": "AzureBastionSubnet"
         }
     }
 }

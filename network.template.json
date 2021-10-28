@@ -11,7 +11,7 @@
         "servcieSubnetName": {
             "type": "string"
         },
-        "mgmtSubNetName": {
+        "bastionSubnetName": {
             "type": "string"
         }
     },
@@ -124,7 +124,7 @@
                         }
                     },
                     {
-                        "name": "[parameters('mgmtSubNetName')]",
+                        "name": "[parameters('bastionSubnetName')]",
                         "properties": {
                             "addressPrefix": "10.0.2.0/24",
                             "networkSecurityGroup": {

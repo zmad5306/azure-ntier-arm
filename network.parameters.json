@@ -11,8 +11,8 @@
         "servcieSubnetName": {
             "value": "service-subnet"
         },
-        "mgmtSubNetName": {
-            "value": "mgmt-subnet"
+        "bastionSubnetName": {
+            "value": "AzureBastionSubnet"
         }
     }
 }

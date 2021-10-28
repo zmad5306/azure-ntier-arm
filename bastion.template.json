@@ -5,7 +5,7 @@
         "vNetName": {
             "type": "string"
         },
-        "mgmtSubnetName": {
+        "bastionSubnetName": {
             "type": "string"
         }
     },
@@ -42,7 +42,7 @@
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'basitionPublicIp')]"
                             },
                             "subnet": {
-                                "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('mgmtSubnetName'))]"
+                                "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('bastionSubnetName'))]"
                             }
                         }
                     }
