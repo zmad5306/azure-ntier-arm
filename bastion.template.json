@@ -26,12 +26,10 @@
             "apiVersion": "2020-11-01",
             "location": "[resourceGroup().location]",
             "sku": {
-                "name": "Standard",
-                "tier": "Regional"
+                "name": "Standard"
             },
             "properties": {  
-                "publicIPAllocationMethod": "Static",
-                "publicIPAddressVersion": "IPv4"
+                "publicIPAllocationMethod": "Static"
             }
         },
         {
@@ -45,9 +43,8 @@
             "properties": {
                 "ipConfigurations": [
                     {
-                        "name": "bastionIpConf",
+                        "name": "IpConf",
                         "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('bastionPubIpName'))]"
                             },
@@ -60,7 +57,8 @@
                 "scaleUnits": "[parameters('bastionHostScaleUnits')]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', variables('bastionPubIpName'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('bastionPubIpName'))]",
+                "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('bastionSubnetName'))]"
             ]
         }
     ],
