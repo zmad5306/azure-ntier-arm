@@ -125,6 +125,9 @@
                     "fileUris": [
                         "https://raw.githubusercontent.com/zmad5306/node-client-1/main/scripts/install.sh"
                     ]
+                },
+                "protectedSettings": {
+                    "commandToExecute": "sh ./install.sh"
                 }
             }
         }
