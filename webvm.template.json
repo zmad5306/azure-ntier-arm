@@ -122,12 +122,12 @@
                 "type": "CustomScript",
                 "typeHandlerVersion": "2.0",
                 "settings": {
-                    "fileUris": "[parameters('extensions_CustomScript_fileUris')]"
+                    "fileUris": [
+                        "https://raw.githubusercontent.com/zmad5306/node-client-1/main/scripts/install.sh"
+                    ]
                 },
                 "protectedSettings": {
-                    "storageAccountName": "[parameters('extensions_CustomScript_storageAccountName')]",
-                    "storageAccountKey": "[parameters('extensions_CustomScript_storageAccountKey')]",
-                    "commandToExecute": "[parameters('extensions_CustomScript_commandToExecute')]"
+                    "commandToExecute": "su install.sh"
                 }
             }
         }
