@@ -54,7 +54,7 @@
                                         "loadBalancerFrontendIPConfiguration": "[resourceId('Microsoft.Network/publicIPAddresses', 'external-lb-public-ip')]",
                                         "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]",
                                         "virtualNetwork": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'))]",
-                                        "ipAddress": "[reference(resourceId('Microsoft.Compute/virtualMachines', parameters('vmName1'))).ipAddress]"
+                                        "ipAddress": "[reference(resourceId(resourceGroup().name, 'Microsoft.Compute/virtualMachines', parameters('vmName1'))).ipAddress]"
                                     }
                                 }
                             ]
