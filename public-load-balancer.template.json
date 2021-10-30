@@ -1,0 +1,100 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vNetName": {
+            "type": "string"
+        },
+        "webSubnetName": {
+            "type": "string"
+        },
+        "vmName1": {
+            "type": "string"
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "external-lb-public-ip",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2020-11-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic"
+            }
+        },
+        {
+            "name": "external-lb",
+            "type": "Microsoft.Network/loadBalancers",
+            "apiVersion": "2020-11-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', 'external-lb-public-ip')]"
+            ],
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "external-lb-fe",
+                        "properties": {
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'external-lb-public-ip')]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "external-lb-backend-pool-web",
+                        "properties": {
+                            "loadBalancerBackendAddresses": [
+                                {
+                                    "name": "external-lb-backend-pool-web-backend-address",
+                                    "properties": {
+                                        "loadBalancerFrontendIPConfiguration": "[resourceId('Microsoft.Network/publicIPAddresses', 'external-lb-public-ip')]",
+                                        "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]",
+                                        "virtualNetwork": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'))]",
+                                        "ipAddress": "[reference(parameters(resourceId(resourceGroup().name, 'Microsoft.Compute/virtualMachines', parameters('vmName1')))).ipAddress]"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "name": "external-lb-lbr-web",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', 'external-lb', 'external-lb-fe')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'external-lb', 'external-lb-backend-pool-web')]"
+                            },
+                            "protocol": "Tcp",
+                            "frontendPort": 80,
+                            "backendPort": 8081,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 5,
+                            "probe": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'loadBalancerExternal1', 'external-lb-probe-web')]"
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "external-lb-probe-web",
+                        "properties": {
+                            "protocol": "Http",
+                            "port": 8081,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {}
+}

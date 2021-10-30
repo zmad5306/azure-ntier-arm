@@ -66,6 +66,15 @@ jobs:
       #     deploymentName: web-vm2
 
       - uses: azure/arm-deploy@v1
+        name: Deploy Public Load Balancer
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.RG_NAME }}
+          template: public-load-balancer.template.json
+          parameters: public-load-balancer.json
+          deploymentName: public-load-balancer
+
+      - uses: azure/arm-deploy@v1
         name: Deploy Bastion
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
