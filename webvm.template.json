@@ -127,7 +127,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "su install.sh"
+                    "commandToExecute": "su ./install.sh"
                 }
             }
         }
