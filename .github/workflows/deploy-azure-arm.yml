@@ -71,7 +71,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.RG_NAME }}
           template: public-load-balancer.template.json
-          parameters: public-load-balancer.json
+          parameters: public-load-balancer.parameters.json
           deploymentName: public-load-balancer
 
       - uses: azure/arm-deploy@v1
