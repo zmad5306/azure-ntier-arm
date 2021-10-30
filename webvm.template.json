@@ -123,7 +123,7 @@
                 "typeHandlerVersion": "2.0",
                 "settings": {
                     "fileUris": [
-                        "https://raw.githubusercontent.com/zmad5306/node-client-1/main/scripts/install.sh"
+                        "https://raw.githubusercontent.com/zmad5306/node-client-1/main/scripts/ubuntu/install.sh"
                     ]
                 },
                 "protectedSettings": {
