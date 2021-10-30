@@ -10,6 +10,9 @@
         },
         "vmName1": {
             "type": "string"
+        },
+        "subscriptionId": {
+            "type": "string"
         }
     },
     "functions": [],
@@ -54,7 +57,7 @@
                                         "loadBalancerFrontendIPConfiguration": "[resourceId('Microsoft.Network/publicIPAddresses', 'external-lb-public-ip')]",
                                         "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]",
                                         "virtualNetwork": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'))]",
-                                        "ipAddress": "[reference(resourceId(resourceGroup().name, 'Microsoft.Compute/virtualMachines', parameters('vmName1'))).ipAddress]"
+                                        "ipAddress": "[reference(resourceId(parameters('subscriptionId'), resourceGroup().name, 'Microsoft.Compute/virtualMachines', parameters('vmName1'))).ipAddress]"
                                     }
                                 }
                             ]
