@@ -107,6 +107,29 @@
                 "enableAcceleratedNetworking": true,
                 "enableIPForwarding": false
             }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2021-07-01",
+            "name": "[concat(parameters('vmName'), '/CustomScript')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+            ],
+            "properties": {
+                "autoUpgradeMinorVersion": true,
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "2.0",
+                "settings": {
+                    "fileUris": "[parameters('extensions_CustomScript_fileUris')]"
+                },
+                "protectedSettings": {
+                    "storageAccountName": "[parameters('extensions_CustomScript_storageAccountName')]",
+                    "storageAccountKey": "[parameters('extensions_CustomScript_storageAccountKey')]",
+                    "commandToExecute": "[parameters('extensions_CustomScript_commandToExecute')]"
+                }
+            }
         }
     ],
     "outputs": {}
