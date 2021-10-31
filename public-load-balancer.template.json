@@ -1,22 +1,19 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "vNetName": {
-            "type": "string"
-        },
-        "webSubnetName": {
-            "type": "string"
-        },
-        "vmName1": {
-            "type": "string"
-        }
-    },
+    "parameters": {},
     "functions": [],
-    "variables": {},
+    "variables": {
+        "loadBalancerName": "external-lb",
+        "loadBalancerFrontEndName": "external-lb-fe",
+        "webBackendPoolName": "external-lb-backend-pool-web",
+        "webLoadBalancingRuleName": "external-lb-lbr-web",
+        "webProbeName": "external-lb-probe-web",
+        "externalPublicIpName": "external-lb-public-ip"
+    },
     "resources": [
         {
-            "name": "external-lb-public-ip",
+            "name": "[variables('externalPublicIpName')]",
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2020-11-01",
             "location": "[resourceGroup().location]",
@@ -25,38 +22,38 @@
             }
         },
         {
-            "name": "external-lb",
+            "name": "[variables('loadBalancerName')]",
             "type": "Microsoft.Network/loadBalancers",
             "apiVersion": "2020-11-01",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', 'external-lb-public-ip')]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('externalPublicIpName'))]"
             ],
             "properties": {
                 "frontendIPConfigurations": [
                     {
-                        "name": "external-lb-fe",
+                        "name": "[variables('loadBalancerFrontEndName')]",
                         "properties": {
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'external-lb-public-ip')]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('externalPublicIpName'))]"
                             }
                         }
                     }
                 ],
                 "backendAddressPools": [
                     {
-                        "name": "external-lb-backend-pool-web"
+                        "name": "[variables('webBackendPoolName')]"
                     }
                 ],
                 "loadBalancingRules": [
                     {
-                        "name": "external-lb-lbr-web",
+                        "name": "[variables('webLoadBalancingRuleName')]",
                         "properties": {
                             "frontendIPConfiguration": {
-                                "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', 'external-lb', 'external-lb-fe')]"
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', variables('loadBalancerName'), variables('loadBalancerFrontEndName'))]"
                             },
                             "backendAddressPool": {
-                                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'external-lb', 'external-lb-backend-pool-web')]"
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', variables('loadBalancerName'), variables('webBackendPoolName'))]"
                             },
                             "protocol": "Tcp",
                             "frontendPort": 80,
@@ -64,14 +61,14 @@
                             "enableFloatingIP": false,
                             "idleTimeoutInMinutes": 5,
                             "probe": {
-                                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'external-lb', 'external-lb-probe-web')]"
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', variables('loadBalancerName'), variables('webProbeName'))]"
                             }
                         }
                     }
                 ],
                 "probes": [
                     {
-                        "name": "external-lb-probe-web",
+                        "name": "[variables('webProbeName')]",
                         "properties": {
                             "protocol": "Http",
                             "port": 8081,

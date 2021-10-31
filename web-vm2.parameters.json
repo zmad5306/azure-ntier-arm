@@ -19,7 +19,12 @@
         },
         "externalLoadBalancerBackendPoolName": {
             "value": "external-lb-backend-pool-web"
+        },
+        "vmPassword": {
+            "value": "dummy value, provided at build time, see .github/deploy-azure-arm.yml"
+        },
+        "vmUsername": {
+            "value": "dummy value, provided at build time, see .github/deploy-azure-arm.yml"
         }
-    }
     }
 }
