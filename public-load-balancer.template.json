@@ -64,7 +64,7 @@
                             "enableFloatingIP": false,
                             "idleTimeoutInMinutes": 5,
                             "probe": {
-                                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'loadBalancerExternal1', 'external-lb-probe-web')]"
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'external-lb', 'external-lb-probe-web')]"
                             }
                         }
                     }
