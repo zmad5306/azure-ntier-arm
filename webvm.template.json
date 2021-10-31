@@ -68,7 +68,6 @@
                             "managedDisk": {
                                 "storageAccountType": "StandardSSD_LRS"
                             },
-                            "deleteOption": "Detach",
                             "diskSizeGB": 30
                         },
                         "dataDisks": []
