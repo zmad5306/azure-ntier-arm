@@ -39,7 +39,9 @@
         }
     },
     "functions": [],
-    "variables": {},
+    "variables": {
+        "nicName": "[concat(parameters('vmNamePrefix'), '-nic')]"
+    },
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachineScaleSets",
@@ -89,6 +91,7 @@
                     "networkProfile": {
                         "networkInterfaceConfigurations": [
                             {
+                                "name": "[variables('nicName')]",
                                 "properties": {
                                     "ipConfigurations": [
                                         {
