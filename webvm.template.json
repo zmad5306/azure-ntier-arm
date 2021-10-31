@@ -81,11 +81,7 @@
                         "adminPassword": "[parameters('vmPassword')]",
                         "linuxConfiguration": {
                             "disablePasswordAuthentication": false,
-                            "provisionVMAgent": true,
-                            "patchSettings": {
-                                "patchMode": "ImageDefault",
-                                "assessmentMode": "ImageDefault"
-                            }
+                            "provisionVMAgent": true
                         },
                         "secrets": [],
                         "allowExtensionOperations": true
