@@ -39,13 +39,22 @@
                             "access": "Allow",
                             "priority": 100,
                             "direction": "Inbound",
-                            "sourcePortRanges": [],
                             "destinationPortRanges": [
                                 "3389",
                                 "22"
-                            ],
-                            "sourceAddressPrefixes": [],
-                            "destinationAddressPrefixes": []
+                            ]
+                        }
+                    }, {
+                        "name": "AllowInternetToWebApp",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "sourceAddressPrefix": "Internet",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 110,
+                            "direction": "Inbound",
+                            "destinationPortRange": "8081"
                         }
                     }
                 ]
