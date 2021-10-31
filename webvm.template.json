@@ -33,6 +33,9 @@
         "vmCount": {
             "type": "int",
             "defaultValue": 1
+        },
+        "vmNamePrefix": {
+            "type": "string"
         }
     },
     "functions": [],
@@ -73,6 +76,7 @@
                         "dataDisks": []
                     },
                     "osProfile": {
+                        "computerNamePrefix": "[parameters('vmNamePrefix')]",
                         "adminUsername": "[parameters('vmUsername')]",
                         "adminPassword": "[parameters('vmPassword')]",
                         "linuxConfiguration": {

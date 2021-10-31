@@ -31,6 +31,9 @@
         },
         "vmCount": {
             "value": 2
+        },
+        "vmNamePrefix": {
+            "value": "web-vm"
         }
     }
 }
