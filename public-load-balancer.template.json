@@ -45,20 +45,7 @@
                 ],
                 "backendAddressPools": [
                     {
-                        "name": "external-lb-backend-pool-web",
-                        "properties": {
-                            "loadBalancerBackendAddresses": [
-                                {
-                                    "name": "external-lb-backend-pool-web-backend-address",
-                                    "properties": {
-                                        "loadBalancerFrontendIPConfiguration": "[resourceId('Microsoft.Network/publicIPAddresses', 'external-lb-public-ip')]",
-                                        "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]",
-                                        "virtualNetwork": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'))]",
-                                        "ipAddress": "[reference(resourceId(resourceGroup().name, 'Microsoft.Compute/virtualMachines', parameters('vmName1'))).ipAddress]"
-                                    }
-                                }
-                            ]
-                        }
+                        "name": "external-lb-backend-pool-web"
                     }
                 ],
                 "loadBalancingRules": [

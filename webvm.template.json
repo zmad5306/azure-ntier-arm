@@ -97,7 +97,12 @@
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]"
                             },
                             "primary": true,
-                            "privateIPAddressVersion": "IPv4"
+                            "privateIPAddressVersion": "IPv4",
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/loadBalancers', 'external-lb', 'external-lb-backend-pool-web')]"
+                                }
+                            ]
                         }
                     }
                 ],
