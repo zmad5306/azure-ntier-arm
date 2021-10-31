@@ -21,12 +21,14 @@
             "type": "securestring"
         },
         "externalLoadBalancerName": {
-            "type": "string",
-            "defaultValue": "external-lb"
+            "type": "string"
         },
         "externalLoadBalancerBackendPoolName": {
-            "type": "string",
-            "defaultValue": "external-lb-backend-pool-web"
+            "type": "string"
+        },
+        "acceleratedNetworking": {
+            "type": "bool",
+            "defaultValue": true
         }
     },
     "functions": [],
@@ -117,7 +119,7 @@
                 "dnsSettings": {
                     "dnsServers": []
                 },
-                "enableAcceleratedNetworking": true,
+                "enableAcceleratedNetworking": "[parameters('acceleratedNetworking')]",
                 "enableIPForwarding": false
             }
         },

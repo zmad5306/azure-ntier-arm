@@ -12,7 +12,7 @@
             "value": "web-subnet"
         },
         "vmSize": {
-            "value": "Standard_D2s_v3"
+            "value": "Standard_A1_v2"
         },
         "externalLoadBalancerName": {
             "value": "external-lb"
@@ -25,6 +25,9 @@
         },
         "vmUsername": {
             "value": "dummy value, provided at build time, see .github/deploy-azure-arm.yml"
+        },
+        "acceleratedNetworking": {
+            "value": false
         }
     }
 }
