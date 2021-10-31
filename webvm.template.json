@@ -40,7 +40,8 @@
     },
     "functions": [],
     "variables": {
-        "nicName": "[concat(parameters('vmNamePrefix'), '-nic')]"
+        "nicName": "[concat(parameters('vmNamePrefix'), '-nic')]",
+        "ipConfigName": "[concat(parameters('vmNamePrefix'), '-ip-config')]"
     },
     "resources": [
         {
@@ -95,9 +96,8 @@
                                 "properties": {
                                     "ipConfigurations": [
                                         {
-                                            "name": "ipconfig1",
+                                            "name": "[variables('ipConfigName')]",
                                             "properties": {
-                                                "privateIPAllocationMethod": "Dynamic",
                                                 "subnet": {
                                                     "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]"
                                                 },
