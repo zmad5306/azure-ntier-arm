@@ -31,6 +31,9 @@
         },
         "scaleSetName": {
             "value": "web-scale-set"
+        },
+        "vmCount": {
+            "value": 2
         }
     }
 }

@@ -32,6 +32,10 @@
         },
         "scaleSetName": {
             "type": "string"
+        },
+        "vmCount": {
+            "type": "int",
+            "defaultValue": 1
         }
     },
     "functions": [],
@@ -43,7 +47,11 @@
             "type": "Microsoft.Compute/virtualMachineScaleSets",
             "name": "[parameters('scaleSetName')]",
             "apiVersion": "2021-03-01",
-            "sku": "[parameters('vmSize')]",
+            "sku": {
+                "name": "[parameters('vmSize')]",
+                "tier": "Standard",
+                "capacity": "[parameters('vmCount')]"
+            },
             "properties": {
                 "overprovision": true,
                 "upgradePolicy": {
