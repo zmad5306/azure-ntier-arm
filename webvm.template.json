@@ -2,9 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "vmName": {
-            "type": "string"
-        },
         "vNetName": {
             "type": "string"
         },
@@ -39,9 +36,7 @@
         }
     },
     "functions": [],
-    "variables": {
-        "nicName": "[concat(parameters('vmName'), '-NetworkInterface')]"
-    },
+    "variables": {},
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachineScaleSets",
@@ -68,7 +63,6 @@
                         },
                         "osDisk": {
                             "osType": "Linux",
-                            "name": "[concat(parameters('vmName'), '_OsDisk')]",
                             "createOption": "FromImage",
                             "caching": "ReadWrite",
                             "managedDisk": {
@@ -80,7 +74,6 @@
                         "dataDisks": []
                     },
                     "osProfile": {
-                        "computerName": "[parameters('vmName')]",
                         "adminUsername": "[parameters('vmUsername')]",
                         "adminPassword": "[parameters('vmPassword')]",
                         "linuxConfiguration": {
@@ -97,7 +90,6 @@
                     "networkProfile": {
                         "networkInterfaceConfiguration": [
                             {
-                                "name": "[variables('nicName')]",
                                 "properties": {
                                     "ipConfigurations": [
                                         {
@@ -130,7 +122,6 @@
                         "extensions": [
                             {
                                 "type": "Microsoft.Compute/virtualMachines/extensions",
-                                "name": "[concat(parameters('vmName'), '/CustomScript')]",
                                 "properties": {
                                     "autoUpgradeMinorVersion": true,
                                     "publisher": "Microsoft.Azure.Extensions",
