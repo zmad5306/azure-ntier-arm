@@ -87,7 +87,7 @@
                         "allowExtensionOperations": true
                     },
                     "networkProfile": {
-                        "networkInterfaceConfiguration": [
+                        "networkInterfaceConfigurations": [
                             {
                                 "properties": {
                                     "ipConfigurations": [
