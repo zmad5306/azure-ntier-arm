@@ -42,7 +42,7 @@
     "variables": {
         "nicName": "[concat(parameters('vmNamePrefix'), '-nic')]",
         "ipConfigName": "[concat(parameters('vmNamePrefix'), '-ip-config')]",
-        "startUpExtensionName": "[concat(parameters('vmNamePrefix'), 'start-up-extension')]"
+        "startUpExtensionName": "[concat(parameters('vmNamePrefix'), '-start-up-extension')]"
     },
     "resources": [
         {
