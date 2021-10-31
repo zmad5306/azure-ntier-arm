@@ -108,7 +108,7 @@
                             "privateIPAddressVersion": "IPv4",
                             "loadBalancerBackendAddressPools": [
                                 {
-                                    "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/loadBalancers', parameters('externalLoadBalancerName'), parameters('externalLoadBalancerBackendPoolName'))]"
+                                    "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/loadBalancers/backendAddressPools', parameters('externalLoadBalancerName'), parameters('externalLoadBalancerBackendPoolName'))]"
                                 }
                             ]
                         }
