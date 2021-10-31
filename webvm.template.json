@@ -29,6 +29,9 @@
         "acceleratedNetworking": {
             "type": "bool",
             "defaultValue": true
+        },
+        "scaleSetName": {
+            "type": "string"
         }
     },
     "functions": [],
@@ -37,16 +40,14 @@
     },
     "resources": [
         {
-            "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2021-07-01",
-            "name": "[parameters('vmName')]",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
-            ],
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "name": "[parameters('scaleSetName')]",
+            "apiVersion": "2021-03-01",
+            "sku": "[parameters('vmSize')]",
             "properties": {
-                "hardwareProfile": {
-                    "vmSize": "[parameters('vmSize')]"
+                "overprovision": true,
+                "upgradePolicy": {
+                    "mode": "Automatic"
                 },
                 "storageProfile": {
                     "imageReference": {
@@ -84,65 +85,61 @@
                     "allowExtensionOperations": true
                 },
                 "networkProfile": {
-                    "networkInterfaces": [
+                    "networkInterfaceConfiguration": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                            "name": "[variables('nicName')]",
+                            "properties": {
+                                "ipConfigurations": [
+                                    {
+                                        "name": "ipconfig1",
+                                        "properties": {
+                                            "privateIPAllocationMethod": "Dynamic",
+                                            "subnet": {
+                                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]"
+                                            },
+                                            "primary": true,
+                                            "privateIPAddressVersion": "IPv4",
+                                            "loadBalancerBackendAddressPools": [
+                                                {
+                                                    "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/loadBalancers/backendAddressPools', parameters('externalLoadBalancerName'), parameters('externalLoadBalancerBackendPoolName'))]"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "dnsSettings": {
+                                    "dnsServers": []
+                                },
+                                "enableAcceleratedNetworking": "[parameters('acceleratedNetworking')]",
+                                "enableIPForwarding": false
+                            }
                         }
                     ]
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2020-11-01",
-            "name": "[variables('nicName')]",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
-                            "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]"
-                            },
-                            "primary": true,
-                            "privateIPAddressVersion": "IPv4",
-                            "loadBalancerBackendAddressPools": [
-                                {
-                                    "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/loadBalancers/backendAddressPools', parameters('externalLoadBalancerName'), parameters('externalLoadBalancerBackendPoolName'))]"
+                },
+                "extensionProfile": {
+                    "extensions": [
+                        {
+                            "type": "Microsoft.Compute/virtualMachines/extensions",
+                            "name": "[concat(parameters('vmName'), '/CustomScript')]",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                            ],
+                            "properties": {
+                                "autoUpgradeMinorVersion": true,
+                                "publisher": "Microsoft.Azure.Extensions",
+                                "type": "CustomScript",
+                                "typeHandlerVersion": "2.0",
+                                "settings": {
+                                    "fileUris": [
+                                        "https://raw.githubusercontent.com/zmad5306/node-client-1/main/scripts/ubuntu/install.sh"
+                                    ]
+                                },
+                                "protectedSettings": {
+                                    "commandToExecute": "sh ./install.sh"
                                 }
-                            ]
+                            }
                         }
-                    }
-                ],
-                "dnsSettings": {
-                    "dnsServers": []
-                },
-                "enableAcceleratedNetworking": "[parameters('acceleratedNetworking')]",
-                "enableIPForwarding": false
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2021-07-01",
-            "name": "[concat(parameters('vmName'), '/CustomScript')]",
-            "location": "eastus",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "autoUpgradeMinorVersion": true,
-                "publisher": "Microsoft.Azure.Extensions",
-                "type": "CustomScript",
-                "typeHandlerVersion": "2.0",
-                "settings": {
-                    "fileUris": [
-                        "https://raw.githubusercontent.com/zmad5306/node-client-1/main/scripts/ubuntu/install.sh"
                     ]
-                },
-                "protectedSettings": {
-                    "commandToExecute": "sh ./install.sh"
                 }
             }
         }
