@@ -76,7 +76,8 @@
                             "protocol": "Http",
                             "port": 8081,
                             "intervalInSeconds": 5,
-                            "numberOfProbes": 2
+                            "numberOfProbes": 2,
+                            "requestPath": "/"
                         }
                     }
                 ]

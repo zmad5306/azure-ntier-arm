@@ -19,6 +19,14 @@
         },
         "vmUsername": {
             "type": "securestring"
+        },
+        "externalLoadBalancerName": {
+            "type": "string",
+            "defaultValue": "external-lb"
+        },
+        "externalLoadBalancerBackendPoolName": {
+            "type": "string",
+            "defaultValue": "external-lb-backend-pool-web"
         }
     },
     "functions": [],
@@ -100,7 +108,7 @@
                             "privateIPAddressVersion": "IPv4",
                             "loadBalancerBackendAddressPools": [
                                 {
-                                    "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/loadBalancers', 'external-lb', 'external-lb-backend-pool-web')]"
+                                    "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/loadBalancers', parameters('externalLoadBalancerName'), parameters('externalLoadBalancerBackendPoolName'))]"
                                 }
                             ]
                         }

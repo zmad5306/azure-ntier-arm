@@ -13,6 +13,13 @@
         },
         "vmSize": {
             "value": "Standard_D2s_v3"
+        },
+        "externalLoadBalancerName": {
+            "value": "external-lb"
+        },
+        "externalLoadBalancerBackendPoolName": {
+            "value": "external-lb-backend-pool-web"
         }
+    }
     }
 }

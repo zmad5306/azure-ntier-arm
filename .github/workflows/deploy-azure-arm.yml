@@ -48,7 +48,7 @@ jobs:
           deploymentName: network
 
       - uses: azure/arm-deploy@v1
-        name: Deploy Public Load Balancer
+        name: Deploy public load balancer
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.RG_NAME }}
@@ -57,7 +57,7 @@ jobs:
           deploymentName: public-load-balancer          
 
       - uses: azure/arm-deploy@v1
-        name: Deploy Web VM 1
+        name: Deploy web vms
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.RG_NAME }}
@@ -75,7 +75,7 @@ jobs:
       #     deploymentName: web-vm2
 
       - uses: azure/arm-deploy@v1
-        name: Deploy Bastion
+        name: Deploy bastion
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.RG_NAME }}
