@@ -94,6 +94,7 @@
                             {
                                 "name": "[variables('nicName')]",
                                 "properties": {
+                                    "primary": true,
                                     "ipConfigurations": [
                                         {
                                             "name": "[variables('ipConfigName')]",
