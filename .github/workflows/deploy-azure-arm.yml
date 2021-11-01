@@ -28,32 +28,32 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # - uses: azure/arm-deploy@v1
-      #   name: Deploy resource group
-      #   with:
-      #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     scope: subscription
-      #     region: ${{ env.REGION }}
-      #     template: rg.template.json
-      #     parameters: rgName=${{ env.RG_NAME }}
-      #     deploymentName: resource-group
+      - uses: azure/arm-deploy@v1
+        name: Deploy resource group
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          scope: subscription
+          region: ${{ env.REGION }}
+          template: rg.template.json
+          parameters: rgName=${{ env.RG_NAME }}
+          deploymentName: resource-group
 
-      # - uses: azure/arm-deploy@v1
-      #   name: Deploy network
-      #   with:
-      #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     resourceGroupName: ${{ env.RG_NAME }}
-      #     template: network.template.json
-      #     parameters: network.parameters.json
-      #     deploymentName: network
+      - uses: azure/arm-deploy@v1
+        name: Deploy network
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.RG_NAME }}
+          template: network.template.json
+          parameters: network.parameters.json
+          deploymentName: network
 
-      # - uses: azure/arm-deploy@v1
-      #   name: Deploy public load balancer
-      #   with:
-      #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     resourceGroupName: ${{ env.RG_NAME }}
-      #     template: public-load-balancer.template.json
-      #     deploymentName: public-load-balancer          
+      - uses: azure/arm-deploy@v1
+        name: Deploy public load balancer
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.RG_NAME }}
+          template: public-load-balancer.template.json
+          deploymentName: public-load-balancer          
 
       - uses: azure/arm-deploy@v1
         name: Deploy web vms
@@ -64,11 +64,11 @@ jobs:
           parameters: webvm.parameters.json vmUsername=${{secrets.AZURE_VM_USERNAME}} vmPassword=${{ secrets.AZURE_VM_PASSWORD }}
           deploymentName: web-vms
 
-      # - uses: azure/arm-deploy@v1
-      #   name: Deploy bastion
-      #   with:
-      #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     resourceGroupName: ${{ env.RG_NAME }}
-      #     template: bastion.template.json
-      #     parameters: bastion.parameters.json
-      #     deploymentName: bastion
+      - uses: azure/arm-deploy@v1
+        name: Deploy bastion
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.RG_NAME }}
+          template: bastion.template.json
+          parameters: bastion.parameters.json
+          deploymentName: bastion
