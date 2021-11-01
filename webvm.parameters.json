@@ -39,7 +39,7 @@
             "value": [
                 {
                     "type": "Microsoft.Compute/virtualMachines/extensions",
-                    "name": "[variables('startUpExtensionName')]",
+                    "name": "web-vm-start-up-extension",
                     "properties": {
                         "autoUpgradeMinorVersion": true,
                         "publisher": "Microsoft.Azure.Extensions",
