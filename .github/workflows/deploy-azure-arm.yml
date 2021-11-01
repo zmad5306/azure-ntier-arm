@@ -60,7 +60,7 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.RG_NAME }}
-          template: webvm.template.json
+          template: vm.template.json
           parameters: webvm.parameters.json vmUsername=${{secrets.AZURE_VM_USERNAME}} vmPassword=${{ secrets.AZURE_VM_PASSWORD }}
           deploymentName: web-vms
 

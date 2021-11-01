@@ -5,7 +5,7 @@
         "vNetName": {
             "type": "string"
         },
-        "webSubnetName": {
+        "subnetName": {
             "type": "string"
         },
         "vmSize": {
@@ -36,6 +36,9 @@
         },
         "vmNamePrefix": {
             "type": "string"
+        },
+        "vmExtensions": {
+            "type": "array"
         }
     },
     "functions": [],
@@ -101,7 +104,7 @@
                                             "name": "[variables('ipConfigName')]",
                                             "properties": {
                                                 "subnet": {
-                                                    "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('webSubnetName'))]"
+                                                    "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vNetName'), parameters('subnetName'))]"
                                                 },
                                                 "primary": true,
                                                 "privateIPAddressVersion": "IPv4",
@@ -123,26 +126,7 @@
                         ]
                     },
                     "extensionProfile": {
-                        "extensions": [
-                            {
-                                "type": "Microsoft.Compute/virtualMachines/extensions",
-                                "name": "[variables('startUpExtensionName')]",
-                                "properties": {
-                                    "autoUpgradeMinorVersion": true,
-                                    "publisher": "Microsoft.Azure.Extensions",
-                                    "type": "CustomScript",
-                                    "typeHandlerVersion": "2.0",
-                                    "settings": {
-                                        "fileUris": [
-                                            "https://raw.githubusercontent.com/zmad5306/node-client-1/main/scripts/ubuntu/install.sh"
-                                        ]
-                                    },
-                                    "protectedSettings": {
-                                        "commandToExecute": "sh ./install.sh"
-                                    }
-                                }
-                            }
-                        ]
+                        "extensions": "[parameters('vmExtensions')]"
                     }
                 }
                 

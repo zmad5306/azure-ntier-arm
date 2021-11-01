@@ -5,7 +5,7 @@
         "vNetName": {
             "value": "ntier-vnet"
         },
-        "webSubnetName": {
+        "subnetName": {
             "value": "web-subnet"
         },
         "vmSize": {
@@ -30,10 +30,32 @@
             "value": "web-scale-set"
         },
         "vmCount": {
-            "value": 2
+            "value": 1
         },
         "vmNamePrefix": {
             "value": "web-vm"
+        },
+        "vmExtensions": {
+            "value": [
+                {
+                    "type": "Microsoft.Compute/virtualMachines/extensions",
+                    "name": "[variables('startUpExtensionName')]",
+                    "properties": {
+                        "autoUpgradeMinorVersion": true,
+                        "publisher": "Microsoft.Azure.Extensions",
+                        "type": "CustomScript",
+                        "typeHandlerVersion": "2.0",
+                        "settings": {
+                            "fileUris": [
+                                "https://raw.githubusercontent.com/zmad5306/node-client-1/main/scripts/ubuntu/install.sh"
+                            ]
+                        },
+                        "protectedSettings": {
+                            "commandToExecute": "sh ./install.sh"
+                        }
+                    }
+                }
+            ]
         }
     }
 }
